@@ -1,23 +1,18 @@
 <?php
 require 'vendor/autoload.php';
 
-var_dump($_FILES)['archivo'];
-
-$valor = isUploadedFile('archivo');
-
-echo '<br> Valor' . $valor . '<br>';
-var_dump ($valor);
-
 main('archivo');
 
+
 function main($name){
-    $result = uploadFile($name);
-    if($result){
-        echo 'todo bien';
+    $subida = uploadFile($name);
+    if($subida){
+        echo 'Se ha subido correctamente';
     } else {
         header('location' . $server['HTTP_REFERER']);
     }
 }
+
 
 function isUploadedFile($name) {
     return isset($_FILES[$name]);
@@ -41,6 +36,21 @@ function isValidUploadedFile($file) {
     return $result;
 }
 
+function moveFile($file) {
+    $target = 'originales';
+    $uniqueName = uniqid('imagen_');
+    $name = $file['name'];
+    $extension = pathinfo($name, PATHINFO_EXTENSION);
+    $tmp_name = $file['tmp_name'];
+    $uploadedFile = $target . '/' . $uniqueName . '.' . $extension;
+    if(move_uploaded_file($tmp_name, $uploadedFile)) {
+        return [$uploadedFile, $uniqueName . '.' . $extension, $uniqueName, $extension,];
+    }
+    echo 'No se ha podido hacer la subida';
+    return false;
+}
+
+
 function uploadFile($paramName) {
     $result = false;
     if(!isUploadedFile($paramName)) {
@@ -53,18 +63,6 @@ function uploadFile($paramName) {
     return moveFile($file);
 }
 
-function moveFile($file) {
-    $target = 'originales';
-    $uniqueName = uniqid('image_');
-    $name = $file['name'];
-    $extension = pathinfo($name, PATHINFO_EXTENSION);
-    $tmp_name = $file['tmp_name'];
-    $uploadedFile = $target . '/' . $uniqueName . '.' . $extension;
-    if(move_uploaded_file($tmp_name, $uploadedFile)) {
-        return [$uploadedFile, $uniqueName . '.' . $extension, $uniqueName, $extension,];
-    }
-    echo 'ha fallado';
-    return false;
-}
+
 ?>
 

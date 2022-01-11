@@ -3,7 +3,7 @@
    require '/vendor/autoload.php';
 
 // Instantiate an Amazon S3 client.
-$bucket = 'proyect-upload-image-php';
+$bucket = 'subir-imagen';
 $key = basename($file_Path);
 $name = $key;
 $file_Path = __DIR__ . '/upload/upload/'. 'image_61dafa2b671b7.jpg';
