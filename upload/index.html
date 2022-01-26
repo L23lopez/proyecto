@@ -1,14 +1,38 @@
-<!doctype html>
 <html lang="en">
 <head>
+    <link href="estilo.css" rel="stylesheet" type="text/css">
     <meta charset="UTF-8">
     <title>Subir archivo</title>
 </head>
 <body>
-    <!-- post, tipo MIME: multipart/form-data, text/html -->
-    <form action="upload2.php" method="post" enctype="multipart/form-data">
-        <input type="file" name="archivo">
-        <input type="submit" value="subir">
+    
+<div class="container">
+
+  <header>
+    <h2><a href="#"><i class="ion-plane"></i> Subir imagen</a></h2>
+  </header>
+
+  <div class="cover">
+    <h1>Sube tu archivo: </h1>
+    
+    <form action="upload.php" method="POST" class="flex-form" enctype="multipart/form-data">
+    
+      <label for="from">
+        <i class="ion-location"></i>
+      </label>
+      
+   
+        <input type="file" accept="image/*" name="file" required>
+        <input type="submit" value="submit">
+      
+    
+    
+    
     </form>
+   
+  </div>
+
+</div>
+
 </body>
 </html>
